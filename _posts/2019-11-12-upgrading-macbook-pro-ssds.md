@@ -36,7 +36,7 @@ Once you have your parts in hand, here are the steps I followed to upgrade my sy
 
 1. [Create a bootable USB macOS Catalina disk](https://www.macworld.com/article/3442597/how-to-create-a-bootable-macos-catalina-installer-drive.html)
 2. Back up the machine with an external Time Machine drive. Make sure you have everything crucial backed up and saved before progressing.
-3. Before removing the original hard drive, do a complete upgrade of the macOS operating system to the latest version available (currently 10.15.1) to ensure that any firmware updates available to your machine are applied. This is especially important if you're upgrading from 10.13 or earlier releases.
+3. Before removing the original hard drive, do a complete upgrade of the macOS operating system to the latest version available (currently 10.15.1) to ensure that any firmware updates available to your machine are applied. This is especially important if you're upgrading from 10.13 or earlier releases. [This page](https://eclecticlight.co/2019/10/08/which-efi-firmware-should-your-mac-be-using-version-4/) lists the latest currently available firmware for each model.
 4. After all the upgrades have been applied, shut down your Mac and follow the relevant [iFixit Mac Laptop Repair guide](https://www.ifixit.com/Device/Mac_Laptop) for removing the SSD from your laptop. Be careful not to strip the P5 and T5 screws.
 5. With the case open, take the time to clean it with the compressed air and isopryl alcohol, it's filthy in there.
 6. Attach your new SSD to the Sintech adapter and place a small strip of the Kaptop insulation tape across the adapter, [as seen here](/assets/DSC_0128.JPG).
