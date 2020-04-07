@@ -42,7 +42,7 @@ and rebooted the system to ensure the hostname and timezone changes were in effe
 
 ## WiFi
 
-Initially I used the ethernet port, but I wanted to use the wifi. Configuring wifi is several steps, but [https://www.raspberrypi.org/forums/viewtopic.php?t=146109](this post) provides a link to a [](script) that configures your Raspberry Pi 3 wifi. Be sure to read it since you're running it as root :)
+Initially I used the ethernet port, but I wanted to use the wifi. Configuring wifi is several steps, but [this post](https://www.raspberrypi.org/forums/viewtopic.php?t=146109) provides a link to a [script](https://gist.githubusercontent.com/anonymous/9119317cdf0c141cb50c523db0f3b70f/raw/d4c2bedcf4799783ca0bf5f54a52e82241faea93/wifi-setup-c7-rpi3.sh) that configures your Raspberry Pi 3 wifi. Be sure to read it since you're running it as root :)
 
     curl https://gist.githubusercontent.com/anonymous/9119317cdf0c141cb50c523db0f3b70f/raw/d4c2bedcf4799783ca0bf5f54a52e82241faea93/wifi-setup-c7-rpi3.sh >> wifi-setup.sh
     chmod +x wifi-setup.sh
