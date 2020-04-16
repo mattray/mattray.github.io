@@ -1,5 +1,5 @@
 ---
-title: QEMU Builds of Chef Infra and Cinc Client for 32-bit ARM
+title: Notes on QEMU Builds of Chef Infra and Cinc Client for 32-bit ARM
 ---
 
 <a href="https://github.com/chef/chef"><img src="/assets/chef-logo.png" alt="Chef" width="100" height="100" align="left" /></a>
@@ -7,11 +7,11 @@ title: QEMU Builds of Chef Infra and Cinc Client for 32-bit ARM
 
 [QEMU](https://www.qemu.org/) is an open source machine emulator and virtualizer that allows you to run operating systems from different architectures. Traditional virtualization is running other operating systems with the same CPU architecture on that architecture (ie. x86 Windows on x86 Linux), but QEMU allows emulation of alternate architectures (ie. ARM or PowerPC) so you can run their operating systems and applications on different architectures.
 
-Building the [Chef Infra and Cinc clients] on [Raspberry Pi Zero]() devices may take up to 15 hours. The machine only has 512 megabytes of RAM, a slow ARMv6 32-bit processor, and the recommendation of disabling swap because it is running from an SD card. Faced with these limitations I decided to investigate emulating the 32-bit ARM platform on a 64-bit x86 machine.
+Building the [Chef Infra and Cinc clients](https://mattray.github.io/2020/04/07/chef-cinc-15-on-arm.html) on [Raspberry Pi Zero](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) devices may take up to 17 hours. The machine only has 512 megabytes of RAM, a slow ARMv6 32-bit processor, and it is running from an SD card. Faced with these limitations I decided to investigate emulating the 32-bit ARM platform on a 64-bit x86 machine.
 
 # System Preparation
 
-The first pass at building for the Raspberry Pi on x86 was inspired by Akkana Peck's post [Emulating Raspbian on your Linux x86/amd64 System](http://shallowsky.com/blog/linux/raspbian-virtual-on-x86.html). Rather than boot a complete operating system, I wanted to chroot into a target file system and let the QEMU CPU emulator intercept the calls. The build machine is Debian 10 x86_64 box with an Intel i7 870 2.93GHz CPU and 16 gigabytes of RAM.
+The first pass at building for the Raspberry Pi on x86 was inspired by Akkana Peck's post [Emulating Raspbian on your Linux x86/amd64 System](http://shallowsky.com/blog/linux/raspbian-virtual-on-x86.html). Rather than boot a complete operating system, I wanted to chroot into a target file system and let the QEMU CPU emulator intercept the calls. The build machine is Debian 10 x86_64 box with an Intel i7 870 2.93GHz CPU and 16 gigabytes of RAM with an SSD.
 
 Commands run as root are prefixed with `#`
 
@@ -112,7 +112,7 @@ Now we'll configure the machine with some specifics to building in my [home lab]
 # echo "Acquire::https::Proxy \"https://ndnd:3142\";" >> /mnt/pi_image/etc/apt/apt.conf.d/01proxy
 ```
 
-Raspbian sets the file /etc/ld.so.preload to `/usr/lib/arm-linux-gnueabihf/libarmmem-${PLATFORM}.so` in an attempt to support both the 6l and 7l ARMHF platforms. This breaks the Chef 32-bit ARM builds on Raspbian so we'll replaced this line with:
+Raspbian sets the file /etc/ld.so.preload to `/usr/lib/arm-linux-gnueabihf/libarmmem-${PLATFORM}.so` in an attempt to support both the 6l and 7l ARMHF platforms. This breaks the Chef 32-bit ARM builds on Raspbian so I replaced this line with:
 ```
 # echo /usr/lib/arm-linux-gnueabihf/libarmmem-v6l.so > //mnt/pi_image/etc/ld.so.preload
 ```
@@ -124,23 +124,21 @@ Because QEMU needs `/usr/bin/qemu-arm-static` to enable emulating ARM binaries i
 
 # Chrooting to Raspbian
 
-The Raspberry Pi Zero and 1 are `armv6l` and use the ARM1176 CPU. We will export that as the `QEMU_CPU` environment variable for our chroot (other ARM processor types could be emulated as well, `qemu-arm -cpu ?` for more choices).
+Now that the QEMU mount point is configured, we can chroot into it
+
 ```
-# export QEMU_CPU=arm1176
 # chroot /mnt/pi_image /bin/bash
 ```
 
-We are now running in the emulated environment
+and we are now running in the emulated environment
 ```
-# uname -m
-armv6l
 # file /bin/ls
 /bin/ls: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 3.2.0, BuildID[sha1]=67a394390830ea3ab4e83b5811c66fea9784ee69, stripped
 ```
 
 # Building Chef & Cinc Clients
 
-The operating system needs the latest patches:
+The operating system needs the latest patches and dependencies to get ready for building:
 ```
 # apt update
 # apt upgrade
@@ -159,3 +157,84 @@ Now we can finally kick off the build and watch the output.
 $ nohup bash DEB-chef-cinc-15.9.17.sh &
 $ tail -f nohup.out
 ```
+
+# Build #1
+
+That build successfully completed building Ruby 2.6.6 and the 3 .DEB packages for omnibus-software, Chef, and Cinc (Ruby only rebuilds for new releases). I benchmarked this head-to-head against the Raspberry Pi and here were the results:
+
+```
+QEMU Intel i7 870 2.93GHz CPU/16 gig RAM: 13:15
+Native RPi Zero: 17:25
+```
+
+I copied the build to my Raspberry Pi Zero and it *failed*. Apparently the default for `qemu-arm-static` is `armv7l`. I copied the packages to a Raspberry Pi 3 and it worked just fine. Unfortunately 13 hours is much longer than the 3 it takes for a Raspberry Pi 4 to do these builds, so it's not saving me any time.
+
+# Build #2
+
+I looked into the QEMU documentation and searched until I stumbled across using environment variables such as `QEMU_CPU`. The Raspberry Pi Zero and 1 are `armv6l` and use the ARM1176 CPU. I exported that as the `QEMU_CPU` environment variable for our chroot (other ARM processor types could be emulated as well, `qemu-arm -cpu ?` for more choices). I rebuilt the build environment following the steps above and chrooted into the new image:
+
+```
+# export QEMU_CPU=arm1176
+# chroot /mnt/pi_image /bin/bash
+# uname -m
+armv6l
+```
+
+I also noticed while reading the build logs that the `omnibus` commands were using `-j3`, so I increased the number of threads to take advantage of the 8 cores on the host machine by adding
+```
+--override workers:7
+```
+
+The build logs revealed that these were passed through and the benchmarks show that speed definitely improved:
+
+```
+QEMU Intel i7 870 2.93GHz CPU/16 gig RAM with -j 7: 10:20
+Native RPi Zero: 17:25
+```
+
+Unfortunately despite successfully building packages, these [failed on the Raspberry Pi Zero](https://gist.github.com/mattray/3d40561b451945b4c9834573d5d00845) and didn't work on the Raspberry Pi 3 either.
+
+# Build #3
+
+After this failure I decided to embrace full QEMU virtualization. Unfortunately the recommended `armv6l` board `versatilepb` is limited to 256 megabytes of RAM and does not take advantage of the additional cores of the host operating system. I used the QEMU Raspberry Pi kernel from https://github.com/dhruvvyas90/qemu-rpi-kernel and resized the image with
+
+```
+cp 2020-02-05-raspbian-buster-lite.img resized-raspbian-buster-lite.img
+qemu-img resize resized-raspbian-buster-lite.img +4G
+```
+
+I then booted it with
+
+```
+qemu-system-arm \
+    -M versatilepb \
+    -cpu arm1176 \
+    -m 256 \
+    -hda ./resized-raspbian-buster-lite.img \
+    -net nic \
+    -net user,hostfwd=tcp::5022-:22 \
+    -dtb qemu-rpi-kernel/versatile-pb.dtb \
+    -kernel qemu-rpi-kernel/kernel-qemu-4.19.50-buster \
+    -append 'root=/dev/sda2 panic=1' \
+    -no-reboot \
+    -display none \
+    -serial stdio
+```
+
+I logged in as `pi/raspberry` and resized the disk with
+```
+$ sudo cfdisk /dev/sda
+```
+
+Delete the second partition (sda2) and create a `New` partition with all available space. Once new partition is created, use `Write` to commit the changes. Then `Quit` cfdisk. Resize and check the old partition and shutdown.
+```
+$ sudo resize2fs /dev/sda2
+$ sudo fsck -f /dev/sda2
+$ sudo halt
+```
+
+Now I could start QEMU with the enlarged image running the previous command and prep the operating system again with the steps from above. Unfortunately, this build *failed* during the Ruby 2.6.6 build after 5 hours. 256 megabytes of RAM were insufficient and the build was on track to take well over a day.
+
+# Conclusion
+
+Unfortunately it appears I will have to keep doing native builds on the Raspberry Pi Zero for now. There is probably a way to use native virtualization on a 64-bit ARM processor that would be faster, but there will have to be a way to remove the 256 megabyte RAM limitation. There may be something in Build #2 that could be fixed, but having an existing working build will suffice for now.
