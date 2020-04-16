@@ -167,7 +167,7 @@ QEMU Intel i7 870 2.93GHz CPU/16 gig RAM: 13:15
 Native RPi Zero: 17:25
 ```
 
-I copied the build to my Raspberry Pi Zero and it *failed*. Apparently the default for `qemu-arm-static` is `armv7l`. I copied the packages to a Raspberry Pi 3 and it worked just fine. Unfortunately 13 hours is much longer than the 3 it takes for a Raspberry Pi 4 to do these builds, so it's not saving me any time.
+I copied the build to my Raspberry Pi Zero and it **failed**. Apparently the default for `qemu-arm-static` is `armv7l`. I copied the packages to a Raspberry Pi 3 and it worked just fine. Unfortunately 13 hours is much longer than the 3 it takes for a Raspberry Pi 4 to do these builds, so it's not saving me any time.
 
 # Build #2
 
@@ -233,7 +233,7 @@ $ sudo fsck -f /dev/sda2
 $ sudo halt
 ```
 
-Now I could start QEMU with the enlarged image running the previous command and prep the operating system again with the steps from above. Unfortunately, this build *failed* during the Ruby 2.6.6 build after 5 hours. 256 megabytes of RAM were insufficient and the build was on track to take well over a day.
+Now I could start QEMU with the enlarged image running the previous command and prep the operating system again with the steps from above. Unfortunately, this build **failed** during the Ruby 2.6.6 build after 5 hours. 256 megabytes of RAM were insufficient and the build was on track to take well over a day.
 
 # Conclusion
 
