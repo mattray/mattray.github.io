@@ -34,7 +34,7 @@ And `tail -f nohup.out` to watch the output. The Raspberry Pi Zero is extremely 
 - The 32-bit Debian/Raspbian/Ubuntu ARMv7l package (Raspberry Pi 3/4 series (Raspberry Pi 2 is untested but should work):
   - [chef-16.0.275-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/mn16cf8mpph0sas/chef-16.0.275-rpi3-armv7l_armhf.deb?raw=1)
 
-# Cinc Infra Client 16.10.258 32-bit ARM DEB and RPM Packages
+# Cinc Infra Client 16.10.275 32-bit ARM DEB and RPM Packages
 
 - The 32-bit CentOS ARMv7hl package (Raspberry Pi 3 (A, A+, B+)):
   - [cinc-16.0.275-1.el7.armv7hl.rpm](https://www.dropbox.com/s/lydwnzvxhr7d18a/cinc-16.0.275-1.el7.armv7hl.rpm?raw=1)
