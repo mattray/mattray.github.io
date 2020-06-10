@@ -35,7 +35,7 @@ A group is used to define access to objects in the Chef Infra Server. I'm using 
 knife group create cookbook-uploader --key meta-user.pem --user meta-user --server-url "https://CHEFINFRASERVER/organizations/test1" --disable-editing -c no_ssl.rb
 ```
 
-I want to restrict the permissions for this group to only allow uploading a cookbook. This requires `create` and `read` permissions on the `cookbooks` container and `create` on the sandboxes container (for uploading).
+I want to restrict the permissions for this group to only allow uploading a cookbook. This requires `create` and `read` permissions on the `cookbooks` container and `create` on the `sandboxes` container for uploading.
 
 ```
 knife acl add group cookbook-uploader containers cookbooks create --key meta-user.pem --user meta-user --server-url "https://CHEFINFRASERVER/organizations/test1" --disable-editing -c no_ssl.rb
