@@ -10,9 +10,9 @@ The total cost was under $90 USD each for upgrading to 500 gigagbyte drives.
 
 # Laptop Models
 
-Take the time to figure out exactly which model you have before getting starting. [EveryMac.com](https://everymac.com/) has thorough descriptions of each model, use `About This Mac`->`System Report` to gather up all the details of your system. These are the 4 machines I updated, named for Futurama characters.
+Take the time to figure out exactly which model you have before getting starting. [EveryMac.com](https://everymac.com/) has thorough descriptions of each model, use `About This Mac`->`System Report` to gather up all the details of your system. These are the 4 machines I updated, named for Futurama characters (Bender and Flexo are the same model).
 
-| Farnsworth | Bender|Flexo | Leela |
+| Farnsworth | Bender/Flexo | Leela |
 | --- | --- | --- |
 | <a href="https://everymac.com/systems/apple/macbook_pro/specs/macbook-pro-core-i5-2.8-13-mid-2014-retina-display-specs.html"><img src="/assets/apple-macbook-pro-13-2013.jpg"/></a> | <a href="https://everymac.com/systems/apple/macbook-air/specs/macbook-air-core-i7-2.2-13-early-2015-specs.html"><img src="/assets/apple-macbook-air-13-2015.jpg"/></a> | <a href="https://everymac.com/systems/apple/macbook-air/specs/macbook-air-core-i5-1.6-11-early-2015-specs.html"><img src="/assets/apple-macbook-air-11-2015.jpg"/></a> |
 | [MacBookPro11,1 (Mid 2014, Retina 13-inch)](https://everymac.com/systems/apple/macbook_pro/specs/macbook-pro-core-i5-2.8-13-mid-2014-retina-display-specs.html) | [MacBook Air (13-inch, Early 2015)](https://everymac.com/systems/apple/macbook-air/specs/macbook-air-core-i7-2.2-13-early-2015-specs.html) | [MacBook Air (11-inch, Early 2015)](https://everymac.com/systems/apple/macbook-air/specs/macbook-air-core-i5-1.6-11-early-2015-specs.html) |
@@ -67,7 +67,7 @@ The upgraded SSDs are noticeably faster and have much more storage than the driv
 | --- | --- |
 | <a href="/assets/Farnsworth-DiskSpeedTest-original.png"><img src="/assets/Farnsworth-DiskSpeedTest-original.png" alt="Before" width="250" height="252"/></a> | <a href="/assets/Farnsworth-DiskSpeedTest-upgraded.png"><img src="/assets/Farnsworth-DiskSpeedTest-upgraded.png" alt="Upgraded" width="250" height="252"/></a> |
 
-## Bender|Flexo: MacBook Air (13-inch, Early 2015)
+## Bender/Flexo: MacBook Air (13-inch, Early 2015)
 
 | Original Speed | Upgraded Speed |
 | --- | --- |
