@@ -66,37 +66,37 @@ update:
 
 ### Create the cookbook client creator client
 
-Next we need to create a `cccc` client that can create other clients.
+Next we need to create a `ccc` client that can create other clients.
 ```
-knife client create cccc -f cccc.pem --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb --disable-editing
-knife acl add client cccc containers clients create --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb
-```
-
-The `cccc` client can add clients to the cookbook-uploader group.
-```
-knife acl add client cccc groups cookbook-uploader read --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb
-knife acl add client cccc groups cookbook-uploader update --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb
+knife client create ccc -f ccc.pem --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb --disable-editing
+knife acl add client ccc containers clients create --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb
 ```
 
-We're now done with this organization on the Chef Infra Server. Copy the the `cccc.pem` off the Chef Infra Server as necessary.
+The `ccc` client can add clients to the cookbook-uploader group.
+```
+knife acl add client ccc groups cookbook-uploader read --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb
+knife acl add client ccc groups cookbook-uploader update --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb
+```
+
+We're now done with this organization on the Chef Infra Server. Copy the the `ccc.pem` off the Chef Infra Server as necessary.
 
 ## Create the upload client
 
-Now that `cccc` can make clients and add them to `cookbook-uploader` group, we will use this to create new clients for uploading. Rather than have a permanent user for managing uploads, I'm going to create a temporary client.
+Now that `ccc` can make clients and add them to `cookbook-uploader` group, we will use this to create new clients for uploading. Rather than have a permanent user for managing uploads, I'm going to create a temporary client.
 ```
-$ knife client create upload1 -f upload1.pem --key cccc.pem --user cccc --server-url "https://ndnd/organizations/test1" -c no_ssl.rb --disable-editing
+$ knife client create upload1 -f upload1.pem --key ccc.pem --user ccc --server-url "https://CHEFSERVER/organizations/test1" -c no_ssl.rb --disable-editing
 Created client[upload1]
 ```
 
 Add the client to `cookbook-uploader` group.
 ```
-$ knife group add client upload1 cookbook-uploader --key cccc.pem --user cccc --server-url "https://ndnd/organizations/test1" -c no_ssl.rb
+$ knife group add client upload1 cookbook-uploader --key ccc.pem --user ccc --server-url "https://CHEFSERVER/organizations/test1" -c no_ssl.rb
 Adding 'upload1' to 'cookbook-uploader' group
 ```
 
 We can verify that the client is part of the `cookbook-uploader` group.
 ```
-$ knife group show cookbook-uploader --key cccc.pem --user cccc --server-url "https://ndnd/organizations/test1" -c no_ssl.rb
+$ knife group show cookbook-uploader --key ccc.pem --user ccc --server-url "https://CHEFSERVER/organizations/test1" -c no_ssl.rb
 actors:    upload1
 clients:   upload1
 groupname: cookbook-uploader
@@ -110,14 +110,14 @@ users:
 
 Now that the temporary user is in place, they can upload the cookbook.
 ```
-$ knife cookbook upload apt -o cookbooks --key upload1.pem --user upload1 --server-url "https://ndnd/organizations/test1" -c no_ssl.rb
+$ knife cookbook upload apt -o cookbooks --key upload1.pem --user upload1 --server-url "https://CHEFSERVER/organizations/test1" -c no_ssl.rb
 Uploading apt          [7.3.0]
 Uploaded 1 cookbook.
 ```
 
 This user has permission to list cookbooks, but not view any others that were not created by .
 ```
-$ knife cookbook list --key upload1.pem --user upload1 --server-url "https://ndnd/organizations/test1" -c no_ssl.rb
+$ knife cookbook list --key upload1.pem --user upload1 --server-url "https://CHEFSERVER/organizations/test1" -c no_ssl.rb
 apt     7.3.0
 ```
 
@@ -126,14 +126,25 @@ apt     7.3.0
 Once the CI/CD has finished uploading the cookbook, the client can be deleted.
 
 ```
-$ knife client delete upload1 --key upload1.pem --user upload1 --server-url "https://ndnd/organizations/test1" -c no_ssl.rb -y
+$ knife client delete upload1 --key upload1.pem --user upload1 --server-url "https://CHEFSERVER/organizations/test1" -c no_ssl.rb -y
 Deleted client[upload1]
 ```
 
+## Reusing the ccc client across multiple organizations
+
+Having a `ccc` client that can create clients in a particular organization is useful, but if you had a large number of organizations you'd probably prefer to reuse that privileged client across them. `knife client create` will allow you to provide your own public key, so the following can be used to create the public key from the generated private key, then reuse it for additional organizations (in our case `test2`).
+```
+chef-server-ctl list-client-keys test1 ccc -v | tail -10 > ccc.pub
+knife client create ccc --public-key ccc.pub --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test2" -c no_ssl.rb --disable-editing
+```
+
+From here out, the rest of the commands with the `ccc` client would be the same, replacing `test1` with `test2` or whatever you organizations may be named.
+
 ## Verifying on the Chef Infra Server
 
-If you need to look at the clients and groups on the Chef Infra Server:
+Here are a few commands for reference if you need to look at the clients and groups on the Chef Infra Server:
 ```
+chef-server-ctl org-list
 knife client list --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb
 knife group list --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb
 knife group show cookbook-uploader --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test1" -c no_ssl.rb
