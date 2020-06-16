@@ -80,6 +80,16 @@ knife acl add client ccc groups cookbook-uploader update --key /etc/opscode/pivo
 
 We're now done with this organization on the Chef Infra Server. Copy the the `ccc.pem` off the Chef Infra Server as necessary.
 
+### Reusing the ccc client across multiple organizations
+
+Having a `ccc` client that can create clients in a particular organization is useful, but if you had a large number of organizations you'd probably prefer to reuse that privileged client across them. `knife client create` will allow you to provide your own public key, so the following can be used to create the public key from the generated private key, then reuse it for additional organizations (in our case `test2`).
+```
+chef-server-ctl list-client-keys test1 ccc -v | tail -10 > ccc.pub
+knife client create ccc --public-key ccc.pub --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test2" -c no_ssl.rb --disable-editing
+```
+
+From here out, the rest of the commands with the `ccc` client would be the same, replacing `test1` with `test2` or whatever you organizations may be named.
+
 ## Create the upload client
 
 Now that `ccc` can make clients and add them to `cookbook-uploader` group, we will use this to create new clients for uploading. Rather than have a permanent user for managing uploads, I'm going to create a temporary client.
@@ -129,16 +139,6 @@ Once the CI/CD has finished uploading the cookbook, the client can be deleted.
 $ knife client delete upload1 --key upload1.pem --user upload1 --server-url "https://CHEFSERVER/organizations/test1" -c no_ssl.rb -y
 Deleted client[upload1]
 ```
-
-## Reusing the ccc client across multiple organizations
-
-Having a `ccc` client that can create clients in a particular organization is useful, but if you had a large number of organizations you'd probably prefer to reuse that privileged client across them. `knife client create` will allow you to provide your own public key, so the following can be used to create the public key from the generated private key, then reuse it for additional organizations (in our case `test2`).
-```
-chef-server-ctl list-client-keys test1 ccc -v | tail -10 > ccc.pub
-knife client create ccc --public-key ccc.pub --key /etc/opscode/pivotal.pem --user pivotal --server-url "https://localhost/organizations/test2" -c no_ssl.rb --disable-editing
-```
-
-From here out, the rest of the commands with the `ccc` client would be the same, replacing `test1` with `test2` or whatever you organizations may be named.
 
 ## Verifying on the Chef Infra Server
 
