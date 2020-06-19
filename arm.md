@@ -6,6 +6,7 @@ permalink: /arm/
 
 I've been doing builds of Chef and Cinc for 32-bit ARM systems (Raspberry Pi and similar) for awhile, so I figured I'd create a landing page for them. You may download the builds I've made or follow the instructions to make your own.
 
+
 # Available Builds
 
 The 32-bit ARM build targets are Debian/Raspbian/Ubuntu on the ARMv6l (Raspberry Pi 1/Zero series) and ARMv7hl (Raspberry Pi 2/3/4 series). CentOS 7 RPMs are also provided for the ARMv7hl.
@@ -39,6 +40,7 @@ The 32-bit ARM build targets are Debian/Raspbian/Ubuntu on the ARMv6l (Raspberry
 | **Cinc 15.9.17** | [cinc-15.9.17-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/ck9oilua8mvo8hr/cinc-15.9.17-rpi-armv6l_armhf.deb?raw=1) | [cinc-15.9.17-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/km7xjgau2uxn3hk/cinc-15.9.17-rpi3-armv7l_armhf.deb?raw=1) | [cinc-15.9.17-1.el7.armv7hl.rpm](https://www.dropbox.com/s/8l90jvbnwl6gbku/chef-15.9.17-1.el7.armv7hl.rpm?raw=1) |
 | **Cinc 15.8.23** | [cinc-15.8.23-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/whd2ouxya1t9kv6/cinc-15.8.23-rpi-armv6l_armhf.deb?raw=1) | [cinc-15.8.23-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/l9pl9jdb1rogo7j/cinc-15.8.23-rpi3-armv7l_armhf.deb?raw=1) | [cinc-15.8.23-1.el7.armv7hl.rpm](https://www.dropbox.com/s/vm4up4v01rfhmhr/cinc-15.8.23-1.el7.armv7hl.rpm?raw=1) |
 | **Cinc 15.7.32** | [cinc-15.7.32-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/4hwhaek8potu4we/cinc-15.7.32-rpi-armv6l_armhf.deb?raw=1) | [cinc-15.7.32-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/l3pri2r53me10dr/cinc-15.7.32-rpi3-armv7l_armhf.deb?raw=1) | [cinc-15.7.32-1.el7.armv7hl.rpm](https://www.dropbox.com/s/9irk2ob6guc7zj0/cinc-15.7.32-1.el7.armv7hl.rpm?raw=1) |
+
 
 # Building with Omnibus
 
@@ -87,7 +89,8 @@ Ensure the `omnibus` user has `sudo` privileges and add the following file to `/
 
 You can now `sudo su - omnibus` and continue without changing users.
 
-# Scripts
+
+# Build Scripts
 
 If you want detailed instructions for the steps for building on these platforms check out [Chef 15 Build Instructions for 32-bit ARM](/2019/05/18/chef-15-on-arm). The build is currently Ruby 2.6.6 and does not require any additional patches. I typically run them as the `omnibus` user with something similar to `nohup bash RPM-chef-cinc-16.2.44.sh &` and `tail -f nohup.out` to monitor the output.
 
