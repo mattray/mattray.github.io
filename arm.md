@@ -1,18 +1,19 @@
 ---
 layout: default
-title: 32-bit ARM Chef Infra and Cinc Client Builds for Linux
+title: 32-bit Arm Chef Infra and Cinc Client Builds for Linux
 permalink: /arm/
 ---
 
-I've been doing builds of Chef and Cinc for 32-bit ARM systems (Raspberry Pi and similar) for awhile, so I figured I'd create a landing page for them. You may download the builds I've made or follow the instructions to make your own.
+I've been doing builds of Chef and Cinc for 32-bit Arm systems (Raspberry Pi and similar) for awhile, so I figured I'd create a landing page for them. You may download the builds I've made or follow the instructions to make your own.
 
 
 # Available Builds
 
-The 32-bit ARM build targets are Debian/Raspbian/Ubuntu on the ARMv6l (Raspberry Pi 1/Zero series) and ARMv7hl (Raspberry Pi 2/3/4 series). CentOS 7 RPMs are also provided for the ARMv7hl.
+The 32-bit Arm build targets are Debian/Raspbian/Ubuntu on the `armv6l` (Raspberry Pi 1/Zero series) and `armv7hl` (Raspberry Pi 2/3/4 series). CentOS 7 RPMs are also provided for the `armv7hl`.
 
-| Version | ARMv6l DEB | ARMv7l DEB | ARMv7l RPM |
+| Version | armv6l DEB | armv7l DEB | armv7l RPM |
 |:-|:-|:-|:-|
+| **Chef Infra 16.2.50** | [chef-16.2.50-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/wohq7hmr4sbahw6/chef-16.2.50-rpi-armv6l_armhf.deb?raw=1) | [chef-16.2.50-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/fcnzko122ne8cq9/chef-16.2.50-rpi3-armv7l_armhf.deb?raw=1) | [chef-16.2.50-1.el7.armv7hl.rpm](https://www.dropbox.com/s/duhfem86gwrvx7r/chef-16.2.50-1.el7.armv7hl.rpm?raw=1) |
 | **Chef Infra 16.2.44** | [chef-16.2.44-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/b8rmvu2t7u813vr/chef-16.2.44-rpi-armv6l_armhf.deb?raw=1) | [chef-16.2.44-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/qghjhnd2ei7ibkp/chef-16.2.44-rpi3-armv7l_armhf.deb?raw=1) | [chef-16.2.44-1.el7.armv7hl.rpm](https://www.dropbox.com/s/v7znbxlkzzcwbj9/chef-16.2.44-1.el7.armv7hl.rpm?raw=1) |
 | **Chef Infra 16.1.16** | [chef-16.1.16-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/3aixsqnkj4rxmyz/chef-16.1.16-rpi-armv6l_armhf.deb?raw=1) | [chef-16.1.16-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/gq94ktkg9mto53e/chef-16.1.16-rpi3-armv7l_armhf.deb?raw=1) | [chef-16.1.16-1.el7.armv7hl.rpm](https://www.dropbox.com/s/l07cv664qabplll/chef-16.1.16-1.el7.armv7hl.rpm?raw=1) |
 | **Chef Infra 16.1.0** | [chef-16.1.0-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/8jkxek8jaw0o9en/chef-16.1.0-rpi-armv6l_armhf.deb?raw=1) | [chef-16.1.0-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/5gqss0m6ezkwho0/chef-16.1.0-rpi3-armv7l_armhf.deb?raw=1) | [chef-16.1.0-1.el7.armv7hl.rpm](https://www.dropbox.com/s/cdmxs3v26qx45og/chef-16.1.0-1.el7.armv7hl.rpm?raw=1) |
@@ -30,6 +31,7 @@ The 32-bit ARM build targets are Debian/Raspbian/Ubuntu on the ARMv6l (Raspberry
 | **Chef Infra 15.3.14** | [chef-15.3.14-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/h5g3irg5m58z9hi/chef-15.3.14-rpi-armv6l_armhf.deb?raw=1) | [chef-15.3.14-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/yz2s3ij95jteqwg/chef-15.3.14-rpi3-armv7l_armhf.deb?raw=1) | [chef-15.3.14-1.el7.armv7hl.rpm](https://www.dropbox.com/s/cpi41gl7gvgeuby/chef-15.3.14-1.el7.armv7hl.rpm?raw=1) |
 | **Chef Infra 15.1.36** | [chef-15.1.36-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/h5g3irg5m58z9hi/chef-15.1.36-rpi-armv6l_armhf.deb?raw=1) | [chef-15.1.36-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/yz2s3ij95jteqwg/chef-15.1.36-rpi3-armv7l_armhf.deb?raw=1) | [chef-15.1.36-1.el7.armv7hl.rpm](https://www.dropbox.com/s/cpi41gl7gvgeuby/chef-15.1.36-1.el7.armv7hl.rpm?raw=1) |
 | **Chef Infra 15.0.300** | [chef-15.0.300-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/7unouanbm6uo6ge/chef-15.0.300-rpi-armv6l_armhf.deb?raw=1) | [chef-15.0.300-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/rjtr2guibg5xv16/chef-15.0.300-rpi3-armv7l_armhf.deb?raw=1) | [chef-15.0.300-1.el7.armv7hl.rpm](https://www.dropbox.com/s/5ps0f2uni7ifb7w/chef-15.0.300-1.el7.armv7hl.rpm?raw=1) |
+| **Cinc 16.2.52** | [cinc-16.2.52-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/ho8kvfgmszzcy5f/cinc-16.2.52-rpi-armv6l_armhf.deb?raw=1) | [cinc-16.2.52-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/bs250xo6tutwybj/cinc-16.2.52-rpi3-armv7l_armhf.deb?raw=1) | [cinc-16.2.52-1.el7.armv7hl.rpm](https://www.dropbox.com/s/rx9tqbeims1utcz/cinc-16.2.52-1.el7.armv7hl.rpm?raw=1) |
 | **Cinc 16.2.44** | [cinc-16.2.44-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/wwth6b56l282t8w/cinc-16.2.44-rpi3-armv7l_armhf.deb?raw=1) | [cinc-16.2.44-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/1jqqk19bazvakhg/cinc-16.2.44-1.el7.armv7hl.rpm?raw=1) | [cinc-16.2.44-1.el7.armv7hl.rpm](https://www.dropbox.com/s/dxim6vjxoug831z/cinc-16.2.44-rpi-armv6l_armhf.deb?raw=1) |
 | **Cinc 16.1.16** | [cinc-16.1.16-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/j8jg0k7fizmzx31/cinc-16.1.17-rpi-armv6l_armhf.deb?raw=1) | [cinc-16.1.16-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/jkwtqf7l28rf089/cinc-16.1.16-rpi3-armv7l_armhf.deb?raw=1) | [cinc-16.1.16-1.el7.armv7hl.rpm](https://www.dropbox.com/s/93r5nomxbx6ywgl/cinc-16.1.16-1.el7.armv7hl.rpm?raw=1) |
 | **Cinc 16.1.0** | [cinc-16.1.0-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/bfvaagthxb9bmpe/cinc-16.1.0-rpi-armv6l_armhf.deb?raw=1) | [cinc-16.1.0-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/uufgkd9fo06zccs/cinc-16.1.0-rpi3-armv7l_armhf.deb?raw=1) | [cinc-16.1.0-1.el7.armv7hl.rpm](https://www.dropbox.com/s/ypm4cil3zlk0why/cinc-16.1.0-1.el7.armv7hl.rpm?raw=1) |
@@ -67,7 +69,7 @@ Raspbian sets the file `/etc/ld.so.preload` to
 
     /usr/lib/arm-linux-gnueabihf/libarmmem-${PLATFORM}.so
 
-in an attempt to support both the 6l and 7l ARMHF platforms. This breaks the Chef 32-bit ARM builds on Raspbian so I have replaced this line with
+in an attempt to support both the 6l and 7l armhf platforms. This breaks the Chef 32-bit Arm builds on Raspbian so I have replaced this line with
 
     echo /usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so > /etc/ld.so.preload
 
@@ -92,10 +94,11 @@ You can now `sudo su - omnibus` and continue without changing users.
 
 # Build Scripts
 
-If you want detailed instructions for the steps for building on these platforms check out [Chef 15 Build Instructions for 32-bit ARM](/2019/05/18/chef-15-on-arm). The build is currently Ruby 2.6.6 and does not require any additional patches. I typically run them as the `omnibus` user with something similar to `nohup bash RPM-chef-cinc-16.2.44.sh &` and `tail -f nohup.out` to monitor the output.
+If you want detailed instructions for the steps for building on these platforms check out [Chef 15 Build Instructions for 32-bit Arm](/2019/05/18/chef-15-on-arm). The build is currently Ruby 2.6.6 and does not require any additional patches. I typically run them as the `omnibus` user with something similar to `nohup bash RPM-chef-cinc-16.2.44.sh &` and `tail -f nohup.out` to monitor the output.
 
 | Version | DEB Build Script | RPM Build Script |
 |:-|:-|:-|
+| **Chef Infra/Cinc 16.2.50** | [DEB-chef-cinc-16.2.50.sh](/assets/DEB-chef-cinc-16.2.50.sh) | [RPM-chef-cinc-16.2.50.sh](/assets/RPM-chef-cinc-16.2.50.sh) |
 | **Chef Infra/Cinc 16.2.44** | [DEB-chef-cinc-16.2.44.sh](/assets/DEB-chef-cinc-16.2.44.sh) | [RPM-chef-cinc-16.2.44.sh](/assets/RPM-chef-cinc-16.2.44.sh) |
 | **Chef Infra/Cinc 16.1.16** | [DEB-chef-cinc-16.1.16.sh](/assets/DEB-chef-cinc-16.1.16.sh) | [RPM-chef-cinc-16.1.16.sh](/assets/RPM-chef-cinc-16.1.16.sh) |
 | **Chef Infra/Cinc 16.1.0** | [DEB-chef-cinc-16.1.0.sh](/assets/DEB-chef-cinc-16.1.0.sh) | [RPM-chef-cinc-16.1.0.sh](/assets/RPM-chef-cinc-16.1.0.sh) |
