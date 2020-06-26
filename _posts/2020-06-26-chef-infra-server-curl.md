@@ -6,7 +6,7 @@ title: Uploading Data Bags to Chef Infra Server with knife, knife raw, and curl
 
 The [Chef Infra Server API](https://docs.chef.io/api_chef_server/) is fairly well-documented and includes many examples. [Data bags](https://docs.chef.io/data_bags/) are a way to store JSON on the Chef Infra Server. The customer I'm working with needed an example of uploading data bags via the API because they wanted to upload JSON into them without using the CLI `knife` tool from ServiceNow. While there are supported [Ruby](https://github.com/chef/chef-api) and [Go](https://github.com/chef/go-chef) Chef Server APIs available, they wanted a `curl` example. This post covers locking down a set of credential and progressing from the `knife` CLI to using `curl`.
 
-# Chef Server Preparation
+# Limited Privilege Client Preparation
 
 In order to interact with the API, we will need a client key with permissions limited to working with data bags. These commands must be run on the Chef Server. First, we'll create the organization for testing:
 
@@ -84,8 +84,10 @@ $ knife raw -m POST /data -i srs.json -k dbm.pem -u dbm -s "https://ndnd/organiz
 {
   "uri": "https://ndnd/organizations/test1/data/srs"
 }
-$ knife data bag list -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c no_ssl.rb
-srs
+$ knife raw -m GET /data -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c no_ssl.rb
+{
+  "srs": "https://ndnd/organizations/test1/data/srs"
+}
 ```
 Create and view the `hyperchicken` item
 ```
@@ -98,10 +100,13 @@ $ knife raw -m POST /data/srs -i data_bags/srs/h.json -k dbm.pem -u dbm -s "http
   "chef_type": "data_bag_item",
   "data_bag": "srs"
 }
-$ knife data bag show srs hyperchicken -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c no_ssl.rb
-id:      hyperchicken
-payload:
-  one:   1
+$ knife raw -m GET /data/srs/hyperchicken -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c no_ssl.rb
+{
+  "id": "hyperchicken",
+  "payload": {
+    "one": "1"
+  }
+}
 ```
 and we can delete the data bag item and entire data bag
 ```
@@ -118,8 +123,10 @@ $ knife raw -m DELETE /data/srs/hyperchicken -k dbm.pem -u dbm -s "https://ndnd/
     }
   }
 }
-$ knife data bag show srs -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c no_ssl.rb
+$ knife raw -m GET /data/srs -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c no_ssl.rb
+{
 
+}
 $ knife raw -m DELETE /data/srs -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c no_ssl.rb
 {
   "name": "srs",
@@ -131,3 +138,62 @@ $ knife data bag list -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c
 ```
 
 # curl
+
+Interacting with the Chef Infra Server API requires authenticating with the client's private key and encoding the messages via openssl. While `knife` handles this under the covers, there is a detailed [curl example](https://docs.chef.io/auth/#other-options) in the documentation. I've pared it down a bit for brevity:
+```
+#!/usr/bin/env bash
+
+_chomp () {
+  # helper function to remove newlines
+  awk '{printf "%s", $0}'
+}
+
+chef_api_request() {
+  # This is the meat-and-potatoes, or rice-and-vegetables, your preference really.
+
+  local method path body timestamp chef_server_url client_name hashed_body hashed_path
+  local canonical_request headers auth_headers
+
+  chef_server_url="https://ndnd/organizations/test1"
+  if echo $chef_server_url | grep -q "/organizations/" ; then
+    endpoint=/organizations/${chef_server_url#*/organizations/}${2%%\?*}
+  else
+    endpoint=${2%%\?*}
+  fi
+  path=${chef_server_url}$2
+  client_name="dbm"
+  method=$1
+  body=$3
+
+  hashed_path=$(echo -n "$endpoint" | openssl dgst -sha1 -binary | openssl enc -base64)
+  hashed_body=$(echo -n "$body" | openssl dgst -sha1 -binary | openssl enc -base64)
+  timestamp=$(date -u "+%Y-%m-%dT%H:%M:%SZ")
+
+  canonical_request="Method:$method\nHashed Path:$hashed_path\nX-Ops-Content-Hash:$hashed_body\nX-Ops-Timestamp:$timestamp\nX-Ops-UserId:$client_name"
+  headers="-H X-Ops-Timestamp:$timestamp \
+    -H X-Ops-Userid:$client_name \
+    -H X-Chef-Version:0.10.4 \
+    -H Accept:application/json \
+    -H X-Ops-Content-Hash:$hashed_body \
+    -H X-Ops-Sign:version=1.0"
+
+  auth_headers=$(printf "$canonical_request" | openssl rsautl -sign -inkey "dbm.pem" | openssl enc -base64 | _chomp |  awk '{ll=int(length/60);i=0; \
+    while (i<=ll) {printf " -H X-Ops-Authorization-%s:%s", i+1, substr($0,i*60+1,60);i=i+1}}')
+
+  case $method in
+    GET)
+      curl_command="curl -k $headers $auth_headers $path"
+      echo $curl_command
+      $curl_command
+      ;;
+    *)
+      echo "Unknown Method. I only know: GET" >&2
+      return 1
+      ;;
+    esac
+  }
+
+ chef_api_request "$@"
+```
+
+You can download it directly [here](assets/chef_curl.sh).
