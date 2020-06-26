@@ -33,7 +33,7 @@ knife acl add client dbm containers data create,read,update,delete -k /etc/opsco
 
 We're now done with this organization on the Chef Infra Server. Copy the the `dbm.pem` off the Chef Infra Server to the destination.
 
-### Reusing the ccc client across multiple organizations
+### Reusing the dbm client across multiple organizations
 
 Having a `dbm` client for managing data bags within a particular organization is useful, but if you had a large number of organizations you'd probably prefer to reuse that client across them. `knife client create` will allow you to provide your own public key, so the following can be used to create the public key from the generated private key, then reuse it for additional organizations (in our case `test2`).
 ```
