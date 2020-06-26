@@ -196,4 +196,4 @@ chef_api_request() {
  chef_api_request "$@"
 ```
 
-You can download it directly [here](assets/chef_curl.sh).
+You can download it directly [here](/assets/chef_curl.sh).
