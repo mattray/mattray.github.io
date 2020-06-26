@@ -4,9 +4,9 @@ title: Uploading Data Bags to Chef Infra Server with knife, knife raw, and curl
 
 <a href="https://github.com/chef/chef"><img src="/assets/chef-logo.png" alt="Chef" width="100" height="100" align="right" /></a>
 
-[Data bags](https://docs.chef.io/data_bags/) are a way to store JSON on the Chef Infra Server. The customer I'm working with needed an example of uploading data bags via the API because they wanted to upload JSON into them without using the CLI `knife` tool from ServiceNow. While there are supported [Ruby](https://github.com/chef/chef-api) and [Go](https://github.com/chef/go-chef) Chef Server APIs available, they wanted a `curl` example.
+The [Chef Infra Server API](https://docs.chef.io/api_chef_server/) is fairly well-documented and includes many examples. [Data bags](https://docs.chef.io/data_bags/) are a way to store JSON on the Chef Infra Server. The customer I'm working with needed an example of uploading data bags via the API because they wanted to upload JSON into them without using the CLI `knife` tool from ServiceNow. While there are supported [Ruby](https://github.com/chef/chef-api) and [Go](https://github.com/chef/go-chef) Chef Server APIs available, they wanted a `curl` example. This post covers locking down a set of credential and progressing from the `knife` CLI to using `curl`.
 
-## Chef Server Preparation
+# Chef Server Preparation
 
 In order to interact with the API, we will need a client key with permissions limited to working with data bags. These commands must be run on the Chef Server. First, we'll create the organization for testing:
 
@@ -19,21 +19,21 @@ Because I'm using a self-signed certificate and not every `knife` subcommand tak
 ssl_verify_mode :verify_none
 ```
 
-### Create the data bag manager client
+## Create the data bag manager client
 
 Next we need to create a `dbm` data bag manager client that manage data bags.
 ```
 knife client create dbm -f dbm.pem -k /etc/opscode/pivotal.pem -u pivotal -s "https://localhost/organizations/test1" -c no_ssl.rb --disable-editing
 ```
 
-### Grant data bag permissions
+## Grant data bag permissions
 ```
 knife acl add client dbm containers data create,read,update,delete -k /etc/opscode/pivotal.pem -u pivotal -s "https://localhost/organizations/test1" -c no_ssl.rb
 ```
 
 We're now done with this organization on the Chef Infra Server. Copy the the `dbm.pem` off the Chef Infra Server to the destination.
 
-### Reusing the dbm client across multiple organizations
+## Reusing the dbm client across multiple organizations
 
 Having a `dbm` client for managing data bags within a particular organization is useful, but if you had a large number of organizations you'd probably prefer to reuse that client across them. `knife client create` will allow you to provide your own public key, so the following can be used to create the public key from the generated private key, then reuse it for additional organizations (in our case `test2`).
 ```
@@ -43,7 +43,7 @@ knife client create dbm --public-key dbm.pub -k /etc/opscode/pivotal.pem -u pivo
 
 From here out, the rest of the commands with the `dbm` client would be the same, replacing `test1` with `test2` or similar for your other organizations.
 
-## Using knife
+# Using knife
 
 If we have access to a CLI, the easiest way to manage data bags would be to use `knife data bag`. We could create the data bag `srs`
 ```
@@ -74,7 +74,7 @@ $ knife data bag delete srs -k dbm.pem -u dbm -s "https://ndnd/organizations/tes
 Deleted data_bag[srs]
 ```
 
-## knife raw
+# knife raw
 
 The [knife raw](https://docs.chef.io/workstation/knife_raw/) command allows us to pass straight JSON to API endpoints with the `knife` CLI handling authentication. Here are examples of how to create the `srs` data bag
 
@@ -129,3 +129,5 @@ $ knife raw -m DELETE /data/srs -k dbm.pem -u dbm -s "https://ndnd/organizations
 $ knife data bag list -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c no_ssl.rb
 
 ```
+
+# curl
