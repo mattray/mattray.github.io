@@ -139,7 +139,7 @@ $ knife data bag list -k dbm.pem -u dbm -s "https://ndnd/organizations/test1" -c
 
 # curl
 
-Interacting with the Chef Infra Server API requires authenticating with the client's private key and encoding the messages via openssl. While `knife` handles this under the covers, there is a detailed [curl example](https://docs.chef.io/auth/#other-options) in the documentation. I've pared it down a bit for brevity:
+Interacting with the Chef Infra Server API requires authenticating with the client's private key and encoding the messages via openssl. While `knife` handles this under the covers, there is a detailed [curl example](https://docs.chef.io/auth/#other-options) in the documentation. I've pared it down a bit for brevity, this currently only handles GETs:
 ```
 #!/usr/bin/env bash
 
@@ -194,6 +194,13 @@ chef_api_request() {
   }
 
  chef_api_request "$@"
+```
+
+Note that the values of the `chef_server_url` and `dbm` user and key are hard-coded rather than take them from a config file. Output will be similar to
+```
+$ bash chef_curl.sh GET /data/srs/hyperchicken
+curl -k -H X-Ops-Timestamp:2020-06-26T06:20:34Z -H X-Ops-Userid:dbm -H X-Chef-Version:0.10.4 -H Accept:application/json -H X-Ops-Content-Hash:2jmj7l5rSw0yVb/vlWAYkK/YBwk= -H X-Ops-Sign:version=1.0 -H X-Ops-Authorization-1:gVUUo9JoIXdZhFxYLgsvEOwKsmMFJLC6M+bMFu1fX6PRVtfyTfgMx2UzBcd5 -H X-Ops-Authorization-2:K0wFnDO8+fIHjMTyu3nQf2LBVCTn/S4SjKMSTMxKF0uN9BW7DU1CBYUmuOXO -H X-Ops-Authorization-3:C3ADAvmvC5N7lIJnSSffrTojSBuhWUeD16wCBqHtfh/AC4WVzPhe5t+gPpoE -H X-Ops-Authorization-4:moYCh2dyx6dnZ+NsfvU9UsfmiJJdNST7ur5kHnCh3bBgARvch8oilzBLlnQk -H X-Ops-Authorization-5:w+a5rVk3NwIDG/WNH95cYNxMtLt+WLyJVIlbMLWXlf/iZylqkcdEbckGtJjJ -H X-Ops-Authorization-6:9GMEhijpP9I+skDAjvw3pLLAHIfXH5jZSAAawxSCdw== https://ndnd/organizations/test1/data/srs/hyperchicken
+{"id":"hyperchicken","payload":{"one":"1"}}
 ```
 
 You can download it directly [here](/assets/chef_curl.sh).
