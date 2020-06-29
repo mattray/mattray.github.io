@@ -5,6 +5,8 @@ title: Notes on QEMU Builds of Chef Infra and Cinc Client for 32-bit ARM
 <a href="https://github.com/chef/chef"><img src="/assets/chef-logo.png" alt="Chef" width="100" height="100" align="left" /></a>
 <a href="https://gitlab.com/cinc-project/client"><img src="/assets/cinc-logo.png" alt="Cinc" width="100" height="100" align="right" /></a>
 
+UPDATE: The latest builds and instructions are now at the [32-bit Arm Chef Infra and Cinc Client Builds for Linux](/arm/) landing page.
+
 [QEMU](https://www.qemu.org/) is an open source machine emulator and virtualizer that allows you to run operating systems from different architectures. Traditional virtualization is running other operating systems with the same CPU architecture on that architecture (ie. x86 Windows on x86 Linux), but QEMU allows emulation of alternate architectures (ie. ARM or PowerPC) so you can run their operating systems and applications on different architectures.
 
 Building the [Chef Infra and Cinc clients](https://mattray.github.io/2020/04/07/chef-cinc-15-on-arm.html) on [Raspberry Pi Zero](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) devices may take up to 17 hours. The machine only has 512 megabytes of RAM, a slow ARMv6 32-bit processor, and it is running from an SD card. Faced with these limitations I decided to investigate emulating the 32-bit ARM platform on a 64-bit x86 machine.

@@ -2,6 +2,8 @@
 title: Building Chef 14.12.9 for CentOS 7 on the Raspberry Pi 3
 ---
 
+UPDATE: The latest builds and instructions are now at the [32-bit Arm Chef Infra and Cinc Client Builds for Linux](/arm/) landing page.
+
 <a href="https://github.com/chef/chef"><img src="/assets/chef-logo.png" alt="Chef" width="200" height="200" align="right" /></a>
 
 Now that I've got [CentOS 7 installed on my Raspberry Pi 3](/2019/05/07/installing-centos-7-6-on-a-raspberry-pi-three) I can make RPM builds available for this platform as well. The CentOS build has a few minor differences from the [Debian/Raspbian builds](2019/04/30/chef-14-on-arm) and I took the opportunity to streamline the instructions a bit.

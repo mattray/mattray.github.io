@@ -2,6 +2,8 @@
 title: Chef Infra Client 14.14.25 and 15.4.45 Builds for CentOS, Debian and Raspbian on 32-bit ARM
 ---
 
+UPDATE: The latest builds and instructions are now at the [32-bit Arm Chef Infra and Cinc Client Builds for Linux](/arm/) landing page.
+
 <a href="https://github.com/chef/chef"><img src="/assets/chef-logo.png" alt="Chef" width="200" height="200" align="right" /></a>
 
 With the new releases of both the [Chef Infra Client 14.14.25] and [Chef Infra Client 15.4.45] it's time for new 32-bit ARM builds.
