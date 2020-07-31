@@ -2,7 +2,7 @@
 
 set -x #echo on
 
-# Chef 16.3.38 RPM
+# Chef 16.3.45 RPM
 date
 sudo systemctl stop chef-client
 sudo yum remove omnibus-toolchain -y
@@ -54,39 +54,37 @@ sudo rpm -Uvh ~/omnibus-toolchain*rpm
 sudo chown omnibus:omnibus -R /opt/omnibus-toolchain
 export PATH="/opt/omnibus-toolchain/bin:$PATH"
 
-# Chef 16.3.38
+# Chef 16.3.45
 cd
-rm -rf ~/chef-16.3.38 ~/v16.3.38.tar.gz
+rm -rf ~/chef-16.3.45 ~/v16.3.45.tar.gz
 sudo rm -rf /opt/chef
 sudo mkdir /opt/chef
 sudo chown omnibus:omnibus -R /opt/chef
-wget https://github.com/chef/chef/archive/v16.3.38.tar.gz
-tar -xzf v16.3.38.tar.gz
-cd ~/chef-16.3.38/omnibus/
+wget https://github.com/chef/chef/archive/v16.3.45.tar.gz
+tar -xzf v16.3.45.tar.gz
+cd ~/chef-16.3.45/omnibus/
 bundle config set without 'development docs debug'
+bundle install --path=.bundle
 bundle exec omnibus build chef -l internal
-cp ~/chef-16.3.38/omnibus/pkg/chef*rpm ~/
-cp ~/chef-16.3.38/omnibus/pkg/chef*rpm /tmp/
+cp ~/chef-16.3.45/omnibus/pkg/chef*rpm ~/
+cp ~/chef-16.3.45/omnibus/pkg/chef*rpm /tmp/
 
-# Cinc 16.3.38
+# Cinc 16.3.45
 cd
-rm -rf ~/chef-stable-cinc-v16.3.38 ~/chef-stable-cinc-v16.3.38.zip ~/chef ~/artifact.zip
+rm -rf ~/chef-stable-cinc-v16.3.47 ~/chef-stable-cinc-v16.3.47.zip ~/chef ~/artifact.zip ~/cinc-full-16.3.47.tar.xz
 sudo rm -rf /opt/chef /opt/cinc
 sudo mkdir /opt/cinc
 sudo chown omnibus:omnibus -R /opt/cinc
-wget https://gitlab.com/cinc-project/upstream/chef/-/archive/stable/cinc-v16.3.38/chef-stable-cinc-v16.3.38.zip
-unzip chef-stable-cinc-v16.3.38.zip
-# get omnibus-software
-wget https://gitlab.com/cinc-project/distribution/client/-/jobs/660659683/artifacts/download -O artifact.zip
-unzip artifact.zip
-cd chef-stable-cinc-v16.3.38/omnibus/
+curl https://gitlab.com/cinc-project/distribution/client/-/jobs/662677576/artifacts/raw/source/unstable/cinc/cinc-full-16.3.47.tar.xz --output cinc-full-16.3.47.tar.xz
+tar -xJf cinc-full-16.3.47.tar.xz
+cd cinc-full-16.3.47/cinc-16.3.47/omnibus/
 bundle config set without 'development docs debug'
 bundle install --path=.bundle
 bundle exec omnibus build cinc -l internal
-cp ~/chef-stable-cinc-v16.3.38/omnibus/pkg/cinc*rpm ~/
-cp ~/chef-stable-cinc-v16.3.38/omnibus/pkg/cinc*rpm /tmp/
+cp ~/cinc-full-16.3.47/cinc-16.3.47/omnibus/pkg/cinc*rpm ~/
+cp ~/cinc-full-16.3.47/cinc-16.3.47/omnibus/pkg/cinc*rpm /tmp/
 
 chmod 644 /tmp/*rpm
 
-echo "16.3.38 Complete!"
+echo "16.3.45 Complete!"
 date
