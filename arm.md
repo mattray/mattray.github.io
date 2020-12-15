@@ -12,9 +12,9 @@ The 32-bit Arm build targets are Debian/Raspbian/Ubuntu on the `armv6l` (Raspber
 
 | Version | armv6l DEB | armv7l DEB | armv7l RPM |
 |:-|:-|:-|:-|
-| **Chef Infra 16.7.61** | [chef-16.7.61-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/6j9oxbk44q3u940/chef-16.7.61-rpi-armv6l_armhf.deb?raw=1) | [chef-16.7.61-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/ey98z3aesj91emm/chef-16.7.61-rpi3-armv7l_armhf.deb?raw=1) | [chef-16.7.61-1.el7.armv7hl.rpm](https://www.dropbox.com/s/ln9br9coogmxjzm/chef-16.7.61-1.el7.armv7hl.rpm?raw=1) |
-| **Cinc Client 16.7.61** | [cinc-16.7.61-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/0bmz5ak371syjnv/cinc-16.7.61-rpi-armv6l_armhf.deb?raw=1) | [cinc-16.7.61-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/6c13g08ovlmmbig/cinc-16.7.61-1.el7.armv7hl.deb?raw=1) | [cinc-16.7.61-1.el7.armv7hl.rpm](https://www.dropbox.com/s/0vgtpfbvq7bljav/cinc-16.7.61-1.el7.armv7hl.rpm?raw=1) |
-| **Chef Infra 15.14.0** | [chef-15.14.0-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/w5icgi023ygl5k5/chef-15.14.0-rpi-armv6l_armhf.deb?raw=1) | [chef-15.14.0-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/q2eqadlbimexzeq/chef-15.14.0-rpi3-armv7l_armhf.deb?raw=1) | [chef-15.14.0-1.el7.armv7hl.rpm](https://www.dropbox.com/s/f7hpub1vzv4ev3g/chef-15.14.0-1.el7.armv7hl.rpm?raw=1) |
+| **Chef Infra Client 16.8.14** | [chef-16.8.14-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/wusypacd95ont7d/chef-16.8.14-rpi-armv6l_armhf.deb?raw=1) | [chef-16.8.14-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/791j7ftkx6ghocc/chef-16.8.14-rpi3-armv7l_armhf.deb?raw=1) | [chef-16.8.14-1.el7.armv7hl.rpm](https://www.dropbox.com/s/rngv5rahcki7kp6/chef-16.8.14-1.el7.armv7hl.rpm?raw=1) |
+| **Cinc Client 16.8.14** | [cinc-16.8.14-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/eqbl8lpp322yksd/cinc-16.8.14-rpi-armv6l_armhf.deb?raw=1) | [cinc-16.8.14-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/mkfjd921y5azb7l/cinc-16.8.14-rpi3-armv7l_armhf.deb?raw=1) | [cinc-16.8.14-1.el7.armv7hl.rpm](https://www.dropbox.com/s/mkfjd921y5azb7l/cinc-16.8.14-rpi3-armv7l_armhf.deb?raw=1) |
+| **Chef Infra Client 15.14.0** | [chef-15.14.0-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/w5icgi023ygl5k5/chef-15.14.0-rpi-armv6l_armhf.deb?raw=1) | [chef-15.14.0-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/q2eqadlbimexzeq/chef-15.14.0-rpi3-armv7l_armhf.deb?raw=1) | [chef-15.14.0-1.el7.armv7hl.rpm](https://www.dropbox.com/s/f7hpub1vzv4ev3g/chef-15.14.0-1.el7.armv7hl.rpm?raw=1) |
 | **Cinc Client 15.14.0** | [cinc-15.14.0-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/825nc58xstfmmto/cinc-15.14.0-rpi-armv6l_armhf.deb?raw=1) | [cinc-15.14.0-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/xt9jjvsjoya1vw8/cinc-15.14.0-rpi3-armv7l_armhf.deb?raw=1) | [cinc-15.14.0-1.el7.armv7hl.rpm](https://www.dropbox.com/s/vkxjg3ikdvjmo33/cinc-15.14.0-1.el7.armv7hl.rpm?raw=1) |
 
 # Building with Omnibus
@@ -71,8 +71,8 @@ If you want detailed instructions for the steps for building on these platforms 
 
 | Version | DEB Build Script | RPM Build Script |
 |:-|:-|:-|
-| **Chef Infra/Cinc 16.7.61** | [DEB-chef-cinc-16.7.61.sh](/assets/DEB-chef-cinc-16.7.61.sh) | [RPM-chef-cinc-16.7.61.sh](/assets/RPM-chef-cinc-16.7.61.sh) |
-| **Chef Infra/Cinc 15.14.-8** | [DEB-chef-15.14.0.sh](/assets/DEB-chef-15.14.0.sh) | [RPM-chef-15.14.0.sh](/assets/RPM-chef-15.14.0.sh) |
+| **Chef Infra/Cinc Client 16.8.14** | [DEB-chef-cinc-16.8.14.sh](/assets/DEB-chef-cinc-16.8.14.sh) | [RPM-chef-cinc-16.8.14.sh](/assets/RPM-chef-cinc-16.8.14.sh) |
+| **Chef Infra/Cinc Client 15.14.-8** | [DEB-chef-15.14.0.sh](/assets/DEB-chef-15.14.0.sh) | [RPM-chef-15.14.0.sh](/assets/RPM-chef-15.14.0.sh) |
 
 Build scripts for previous releases are available [here](/old-arm/).
 
