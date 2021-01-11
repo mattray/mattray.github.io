@@ -86,7 +86,7 @@ These are the build scripts used for building previous artifacts.
 | **Chef Infra/Cinc Client 16.0.287** | [DEB-chef-cinc-16.0.287.sh](/assets/DEB-chef-cinc-16.0.287.sh) | [RPM-chef-cinc-16.0.287.sh](/assets/RPM-chef-cinc-16.0.287.sh) |
 | **Chef Infra/Cinc Client 16.0.275** | [DEB-chef-cinc-16.0.275.sh](/assets/DEB-chef-cinc-16.0.275.sh) | [RPM-chef-cinc-16.0.275.sh](/assets/RPM-chef-cinc-16.0.275.sh) |
 | **Chef Infra/Cinc Client 16.0.257** | [DEB-chef-cinc-16.0.257.sh](/assets/DEB-chef-cinc-16.0.257.sh) | [RPM-chef-cinc-16.0.257.sh](/assets/RPM-chef-cinc-16.0.257.sh) |
-| **Chef Infra/Cinc Client 15.14.-8** | [DEB-chef-15.14.0.sh](/assets/DEB-chef-15.14.0.sh) | [RPM-chef-15.14.0.sh](/assets/RPM-chef-15.14.0.sh) |
+| **Chef Infra/Cinc Client 15.14.0** | [DEB-chef-15.14.0.sh](/assets/DEB-chef-15.14.0.sh) | [RPM-chef-15.14.0.sh](/assets/RPM-chef-15.14.0.sh) |
 | **Chef Infra Client 15.13.8** | [DEB-chef-15.13.8.sh](/assets/DEB-chef-15.13.8.sh) | [RPM-chef-15.13.8.sh](/assets/RPM-chef-15.13.8.sh) |
 | **Chef Infra Client 15.12.22** | [DEB-chef-15.12.22.sh](/assets/DEB-chef-15.12.22.sh) | [RPM-chef-15.12.22.sh](/assets/RPM-chef-15.12.22.sh) |
 | **Chef Infra Client 15.11.3** | [DEB-chef-15.11.3.sh](/assets/DEB-chef-15.11.3.sh) | [RPM-chef-15.11.3.sh](/assets/RPM-chef-15.11.3.sh) |
