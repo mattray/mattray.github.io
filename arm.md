@@ -6,14 +6,16 @@ permalink: /arm/
 
 I've been doing builds of Chef and Cinc for 32-bit Arm systems (Raspberry Pi and similar) for awhile, so I figured I'd create a landing page for them. You may download the builds I've made or follow the instructions to make your own.
 
+[Graham Weldon](https://grahamweldon.com/) has taken these instructions and created new **armel** builds for running on [switches](https://www.edge-core.com/productsInfo.php?cls=1&cls2=9&cls3=46&id=21) and other similar hardware. The build scripts do not require additional patches, but Graham has [documented how to create the builds](https://grahamweldon.com/post/2021/01/building-chef-infra-on-cumulus-linux-armel/). Copies of the builds will be hosted here going forward.
+
 # Current Builds
 
 The 32-bit Arm build targets are Debian/Raspbian/Ubuntu on the `armv6l` (Raspberry Pi 1/Zero series) and `armv7hl` (Raspberry Pi 2/3/4 series). CentOS 7 RPMs are also provided for the `armv7hl`. Previous releases of the builds and their instructions are available [here](/old-arm/).
 
-| Version | armv6l DEB | armv7l DEB | armv7l RPM |
-|:-|:-|:-|:-|
-| **Chef Infra Client 16.10.8** | [chef-16.10.8-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/da4qoqv47qrqjtd/chef-16.10.8-rpi-armv6l_armhf.deb?raw=1) | [chef-16.10.8-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/l1rw3agkvsrcqaw/chef-16.10.8-rpi3-armv7l_armhf.deb?raw=1) | [chef-16.10.8-1.el7.armv7hl.rpm](https://www.dropbox.com/s/rqhb6nf8tycm7a5/chef-16.10.8-1.el7.armv7hl.rpm?raw=1) |
-| **Cinc Client 16.10.8** | [cinc-16.10.8-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/blh3lgfd3opjoku/cinc-16.10.8-rpi-armv6l_armhf.deb?raw=1) | [cinc-16.10.8-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/d08xr2vv2324f38/cinc-16.10.8-rpi3-armv7l_armhf.deb?raw=1) | [cinc-16.10.8-1.el7.armv7hl.rpm](https://www.dropbox.com/s/ridy3co5x4h7oz9/cinc-16.10.8-1.el7.armv7hl.rpm?raw=1) |
+| Version | armv6l DEB | armv7l DEB | armv7l RPM | armel DEB |
+|:-|:-|:-|:-|:-|
+| **Chef Infra Client 16.10.8** | [chef-16.10.8-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/da4qoqv47qrqjtd/chef-16.10.8-rpi-armv6l_armhf.deb?raw=1) | [chef-16.10.8-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/l1rw3agkvsrcqaw/chef-16.10.8-rpi3-armv7l_armhf.deb?raw=1) | [chef-16.10.8-1.el7.armv7hl.rpm](https://www.dropbox.com/s/rqhb6nf8tycm7a5/chef-16.10.8-1.el7.armv7hl.rpm?raw=1) | [chef-16.10.8-armel.deb](https://www.dropbox.com/s/6rlbko92fzzmrb6/chef-16.10.8-armel.deb?dl=0) |
+| **Cinc Client 16.10.8** | [cinc-16.10.8-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/blh3lgfd3opjoku/cinc-16.10.8-rpi-armv6l_armhf.deb?raw=1) | [cinc-16.10.8-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/d08xr2vv2324f38/cinc-16.10.8-rpi3-armv7l_armhf.deb?raw=1) | [cinc-16.10.8-1.el7.armv7hl.rpm](https://www.dropbox.com/s/ridy3co5x4h7oz9/cinc-16.10.8-1.el7.armv7hl.rpm?raw=1) | [cinc-16.10.8-armel.deb](https://www.dropbox.com/s/krpvnkfnusr9lyc/cinc-16.10.8-armel.deb?dl=0) |
 | **Chef Infra Client 15.15.0** | [chef-15.15.0-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/m4cxtfs5l22x698/chef-15.15.0-rpi-armv6l_armhf.deb?raw=1) | [chef-15.15.0-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/j2sisrcmow0m7bj/chef-15.15.0-rpi3-armv7l_armhf.deb?raw=1) | [chef-15.15.0-1.el7.armv7hl.rpm](https://www.dropbox.com/s/nz2ooxu715dmyym/chef-15.15.0-1.el7.armv7hl.rpm?raw=1) |
 | **Cinc Client 15.15.0** | [cinc-15.15.0-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/kqbs0ewsh4xpo0d/cinc-15.15.0-rpi-armv6l_armhf.deb?raw=1) | [cinc-15.15.0-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/pydw9zwztdhqow0/cinc-15.15.0-rpi3-armv7l_armhf.deb?raw=1) | [cinc-15.15.0-1.el7.armv7hl.rpm](https://www.dropbox.com/s/5evgbwug9rxn2c2/cinc-15.15.0-1.el7.armv7hl.rpm?raw=1) |
 
