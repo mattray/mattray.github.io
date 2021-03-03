@@ -8,11 +8,11 @@ After watching the [linked video](https://www.youtube.com/watch?v=CfirQC99xPc) I
 
 ## 2010 iPad
 
-After nearly succeeded with my first attempt at building an external monitor, I knew I wanted to try again. My other "broken" laptops are still in use as Linux servers, but I had an original iPad that I had barely used since it stopped receiving iOS updates several years ago. I followed [iFixit's iPad Wi-Fi Display Frame Replacement](https://www.ifixit.com/Guide/iPad+Wi-Fi+Display+Frame+Replacement/2209) to disassemble it, but stopped short of removing it from the glass front (lesson learned). I then went back to AliExpress and found what looked like the right model [HDMI VGA LCD controller](https://www.aliexpress.com/item/1005001719139974.html?spm=a2g0s.9042311.0.0.28774c4dH1GIM9) for about $19 with shipping.
+After nearly succeeding with my first attempt at building an external monitor, I knew I wanted to try again. My other "broken" laptops are still in use as Linux servers, but I had an original iPad that I had barely used since it stopped receiving iOS updates several years ago. I followed [iFixit's iPad Wi-Fi Display Frame Replacement](https://www.ifixit.com/Guide/iPad+Wi-Fi+Display+Frame+Replacement/2209) to disassemble it, but stopped short of removing it from the glass front (lesson learned). I then went back to AliExpress and found what looked like the right model [HDMI VGA LCD controller](https://www.aliexpress.com/item/1005001719139974.html?spm=a2g0s.9042311.0.0.28774c4dH1GIM9) for about $19 with shipping.
 
 A few weeks later it finally showed up and didn't work. Did I have a bad unit, had I broken my iPad screen, or had I done something wrong?
 
-## Trying Again
+## Try, Try Again
 
 Undeterred, I decided to try AliExpress again. You'd think with a name like [Yqwsyxl LCD parts Store](https://www.aliexpress.com/store/910350379?spm=a2g0s.9042311.0.0.28774c4dH1GIM9) you'd get quality, but I decided since I was already down $19 I'd go with [CZHAO Accessories Store](https://www.aliexpress.com/store/5793675?spm=a2g0s.9042311.0.0.28774c4dH1GIM9) and pay the $21 premium (with international shipping). AliExpress prices and shipping times seem to vary wildly in response to US, Australian, and Chinese currency fluctuations and this took nearly 6 weeks to show up.
 
