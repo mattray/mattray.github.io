@@ -26,7 +26,7 @@ I then used the built-in `raspi-config` command to enable SSH and to configure t
 
 I then copied over my SSH key so I wouldn't need to use my password when logging in.
 
-    ssh-copy-id debian@10.0.0.3
+    ssh-copy-id pi@10.0.0.3
 
 ### root
 
