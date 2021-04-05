@@ -71,6 +71,7 @@ bundle install --path=.bundle
 bundle exec omnibus build chef -l internal
 cp ~/chef-$VERSION/omnibus/pkg/chef*deb ~/
 cp ~/chef-$VERSION/omnibus/pkg/chef*deb /tmp/
+sudo cp ~/chef-$VERSION/omnibus/pkg/chef*deb /root/
 
 # Cinc $VERSION
 cd
@@ -87,6 +88,7 @@ bundle install --path=.bundle
 bundle exec omnibus build cinc -l internal
 cp ~/cinc-full-$VERSION/cinc-$VERSION/omnibus/pkg/cinc*deb ~/
 cp ~/cinc-full-$VERSION/cinc-$VERSION/omnibus/pkg/cinc*deb /tmp/
+sudo cp ~/cinc-full-$VERSION/cinc-$VERSION/omnibus/pkg/cinc*deb /root/
 
 chmod 644 /tmp/*deb
 
