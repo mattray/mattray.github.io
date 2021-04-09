@@ -15,24 +15,24 @@ sudo apt remove cinc -y
 
 set -xuo pipefail #echo on, allow ruby failures
 
-# Ruby 2.7.2
+# Ruby 2.7.3
 cd
 rm -rf ~/.bundle
 rm -rf ~/.gem
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 RUBYVERSION=$(ruby --version)
-if [[ $RUBYVERSION =~ 2.7.2 ]]; then
-  echo "Using existing Ruby 2.7.2 provided by rbenv"
+if [[ $RUBYVERSION =~ 2.7.3 ]]; then
+  echo "Using existing Ruby 2.7.3 provided by rbenv"
 else
-  echo "Building Ruby 2.7.2"
+  echo "Building Ruby 2.7.3"
   rm -rf ~/.rbenv
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
   cd ~/.rbenv && src/configure && make -C src
   mkdir plugins
   git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
-  rbenv install 2.7.2
-  rbenv global 2.7.2
+  rbenv install 2.7.3
+  rbenv global 2.7.3
   eval "$(rbenv init -)"
 fi
 
