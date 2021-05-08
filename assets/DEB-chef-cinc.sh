@@ -8,6 +8,8 @@ set -x # echo on
 date
 sudo systemctl stop chef-client
 sudo systemctl stop chef-client.timer
+sudo systemctl stop cinc-client
+sudo systemctl stop cinc-client.timer
 sudo apt remove omnibus-toolchain -y
 sudo apt remove chef-workstation -y
 sudo apt remove chef -y
