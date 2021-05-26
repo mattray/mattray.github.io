@@ -5,7 +5,9 @@ I may be late to the party, but I've finally switched from ``bash`` to ``zsh``. 
 ## Making the Switch
 
 There were a pair of useful articles I read beforehand:
+
     [Switching to ZSH](http://zpalexander.com/switching-to-zsh/)
+
     [Moving to zsh](https://scriptingosx.com/2019/06/moving-to-zsh/)
 
 After reading through those, I figured I'd just make the switch and suffer the fallout.
