@@ -1,10 +1,11 @@
-# Switching to zsh
+# Switching to zsh (updated for Emacs M-x shell)
 
 I may be late to the party, but I've finally switched from ``bash`` to ``zsh``. It wasn't due to any failings of bash, it's because I've been using it inside of [Emacs M-x shell](/2019/11/03/emacsconf) and never felt the need the fancy features of [Oh My Zsh](https://ohmyz.sh/) or any of the other new and improved shells. The [Starship](https://starship.rs/) shell prompt is a vast improvement on the ``PS1`` settings and scripts available in bash as well. What prompted the change was macOS and Arch Linux both defaulting to it on installation.
 
 ## Making the Switch
 
 There were a pair of useful articles I read beforehand:
+
     [Switching to ZSH](http://zpalexander.com/switching-to-zsh/)
     [Moving to zsh](https://scriptingosx.com/2019/06/moving-to-zsh/)
 
@@ -57,6 +58,15 @@ To ensure that ``M-x shell`` used zsh instead of bash I set the custom variables
  '(explicit-shell-file-name "/bin/zsh")
  '(explicit-zsh-args '("--interactive" "--login"))
 ```
-in my [.emacs.d/init.el](https://github.com/mattray/home-directory/blob/main/.emacs.d/init.el).
+and to off echoed commands from zsh added
+```
+ '(comint-process-echoes 0)
+ ```
+to my [.emacs.d/init.el](https://github.com/mattray/home-directory/blob/main/.emacs.d/init.el).
 
 I did not use ``AUTO_CD`` settings because Emacs tended to lose track of the ``CWD`` and I don't care enough to figure out how to use [Dirtrack](https://www.emacswiki.org/emacs/ShellDirtrackByPrompt).
+
+I added the following to my ``.zshrc`` to [prevent Tramp from hanging](https://www.emacswiki.org/emacs/TrampMode#h5o-9) on remote ssh zsh connections.
+```
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
+```
