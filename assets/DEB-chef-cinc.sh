@@ -2,7 +2,7 @@
 
 if [ -z "$VERSION" ]; then echo "\$VERSION is unset"; exit; fi
 
-set -x # echo on
+set -xue # xtrace, nounset, errexit
 
 # Chef $VERSION DEB
 date
@@ -14,8 +14,6 @@ sudo apt remove omnibus-toolchain -y
 sudo apt remove chef-workstation -y
 sudo apt remove chef -y
 sudo apt remove cinc -y
-
-set -xuo pipefail #echo on, allow ruby failures
 
 # Ruby 2.7.3
 cd
