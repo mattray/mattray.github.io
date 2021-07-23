@@ -2,7 +2,7 @@
 
 if [ -z "$VERSION" ]; then echo "\$VERSION is unset"; exit; fi
 
-set -xue # xtrace, nounset, errexit
+set -xu # xtrace, nounset
 
 # Chef $VERSION DEB
 date
