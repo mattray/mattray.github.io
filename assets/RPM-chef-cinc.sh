@@ -15,24 +15,24 @@ sudo yum remove chef-workstation -y
 sudo yum remove chef -y
 sudo yum remove cinc -y
 
-# Ruby 2.7.3
+# Ruby 2.7.4
 cd
 rm -rf ~/.bundle
 rm -rf ~/.gem
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 RUBYVERSION=$(ruby --version)
-if [[ $RUBYVERSION =~ 2.7.3 ]]; then
-  echo "Using existing Ruby 2.7.3 provided by rbenv"
+if [[ $RUBYVERSION =~ 2.7.4 ]]; then
+  echo "Using existing Ruby 2.7.4 provided by rbenv"
 else
-  echo "Building Ruby 2.7.3"
+  echo "Building Ruby 2.7.4"
   rm -rf ~/.rbenv
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
   cd ~/.rbenv && src/configure && make -C src
   mkdir plugins
   git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
-  rbenv install 2.7.3
-  rbenv global 2.7.3
+  rbenv install 2.7.4
+  rbenv global 2.7.4
   eval "$(rbenv init -)"
 fi
 
