@@ -14,7 +14,7 @@ The 32-bit Arm build targets are Debian/Raspbian/Ubuntu on the `armv6l` (Raspber
 
 | Version | armv6l DEB | armv7l DEB | armv7l RPM | armel DEB |
 |:-|:-|:-|:-|:-|
-| **Cinc Client 17.4.48** | [cinc-17.4.48-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/tf3atupbkc0gc5q/cinc-17.4.48-rpi-armv6l_armhf.deb?raw=1) | [cinc-17.4.48-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/fso7rsiz57dzpe1/cinc-17.4.48-rpi3-armv7l_armhf.deb?raw=1) | | |
+| **Cinc Client 17.5.22** | [cinc-17.5.22-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/lvkvuyxzaymh702/cinc-17.5.22-rpi-armv6l_armhf.deb?raw=1) | [cinc-17.5.22-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/vab5vqg1ondpx7z/cinc-17.5.22-rpi3-armv7l_armhf.deb?raw=1) | | |
 | **Cinc Client 17.3.48** | | | [cinc-17.3.48-1.el7.armv7hl.rpm](https://www.dropbox.com/s/hip8bvcac4v2851/cinc-17.3.48-1.el7.armv7hl.rpm?raw=1) | |
 | **Cinc Client 17.1.35** | | | | [cinc-17.1.35-armel.deb](https://www.dropbox.com/s/xw03x31lufgmjyc/cinc-17.1.35-armel.deb?raw=1) |
 | **Cinc Client 16.14.1** | [cinc-16.14.1-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/ewv7vx7ldc79nro/cinc-16.14.1-rpi-armv6l_armhf.deb?raw=1) | [cinc-16.14.1-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/ahrkdcghaohe7hy/cinc-16.14.1-rpi3-armv7l_armhf.deb?raw=1) | [cinc-16.14.1-1.el7.armv7hl.rpm](https://www.dropbox.com/s/qeljxls9u34q0sr/cinc-16.14.1-1.el7.armv7hl.rpm?raw=1) | |
