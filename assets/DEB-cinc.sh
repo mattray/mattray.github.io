@@ -34,28 +34,10 @@ fi
 
 set -xeuo pipefail #echo on, stop on failures
 
-# Omnibus-Toolchain
-cd
-rm -rf ~/omnibus-toolchain
-sudo rm -rf /opt/omnibus-toolchain /var/cache/omnibus
-sudo mkdir /opt/omnibus-toolchain
-sudo mkdir /var/cache/omnibus
-sudo chown omnibus:omnibus -R /opt/omnibus-toolchain
-sudo chown omnibus:omnibus -R /var/cache/omnibus
-git clone https://github.com/chef/omnibus-toolchain.git
-cd omnibus-toolchain
-bundle config set without 'development docs debug'
-bundle install --path=.bundle
-bundle exec omnibus build omnibus-toolchain -l internal
-cp ~/omnibus-toolchain/pkg/omnibus-toolchain*deb ~/
-sudo rm -rf /opt/omnibus-toolchain
-sudo dpkg -i ~/omnibus-toolchain*deb
-sudo chown omnibus:omnibus -R /opt/omnibus-toolchain
-export PATH="/opt/omnibus-toolchain/bin:$PATH"
-
 # Cinc $VERSION
-cd
-rm -rf ~/cinc-full-$VERSION ~/cinc-full-$VERSION.tar.xz
+mkdir ~/$VERSION
+cd ~/$VERSION
+rm -rf ~/$VERSION/cinc-full-$VERSION ~/$VERSION/cinc-full-$VERSION.tar.xz
 sudo rm -rf /opt/chef /opt/cinc
 sudo mkdir /opt/cinc
 sudo chown omnibus:omnibus -R /opt/cinc
@@ -63,12 +45,11 @@ curl http://downloads.cinc.sh/source/stable/cinc/cinc-full-$VERSION.tar.xz --out
 tar -xJf cinc-full-$VERSION.tar.xz
 cd cinc-full-$VERSION/cinc-$VERSION/omnibus/
 bundle lock --update=chef
-bundle config set without 'development docs debug'
 bundle install --path=.bundle
 bundle exec omnibus build cinc -l internal
-cp ~/cinc-full-$VERSION/cinc-$VERSION/omnibus/pkg/cinc*deb ~/
-cp ~/cinc-full-$VERSION/cinc-$VERSION/omnibus/pkg/cinc*deb /tmp/
-sudo cp ~/cinc-full-$VERSION/cinc-$VERSION/omnibus/pkg/cinc*deb /root/
+cp ~/$VERSION/cinc-full-$VERSION/cinc-$VERSION/omnibus/pkg/cinc*deb ~/
+cp ~/$VERSION/cinc-full-$VERSION/cinc-$VERSION/omnibus/pkg/cinc*deb /tmp/
+sudo cp ~/$VERSION/cinc-full-$VERSION/cinc-$VERSION/omnibus/pkg/cinc*deb /root/
 
 chmod 644 /tmp/*deb
 
