@@ -14,7 +14,7 @@ The 32-bit Arm build targets are Debian/Raspbian/Ubuntu on the `armv6l` (Raspber
 
 | Version | armv6l DEB | armv7l DEB | armv7l RPM | armel DEB |
 |:-|:-|:-|:-|:-|
-| **Cinc Client 17.6.18** | [cinc-17.6.18-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/usuorkmdyy8ftkm/cinc-17.6.18-rpi-armv6l_armhf.deb?raw=1) | [cinc-17.6.18-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/99z56okxp5ctu3c/cinc-17.6.18-rpi3-armv7l_armhf.deb?raw=1) | | |
+| **Cinc Client 17.7.29** | [cinc-17.7.29-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/72b1edc4309psvs/cinc-17.7.29-rpi-armv6l_armhf.deb?raw=1) | [cinc-17.7.29-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/c68tjn6wnmich5z/cinc-17.7.29-rpi3-armv7l_armhf.deb?raw=1) | | |
 | **Cinc Client 17.3.48** | | | [cinc-17.3.48-1.el7.armv7hl.rpm](https://www.dropbox.com/s/hip8bvcac4v2851/cinc-17.3.48-1.el7.armv7hl.rpm?raw=1) | |
 | **Cinc Client 17.1.35** | | | | [cinc-17.1.35-armel.deb](https://www.dropbox.com/s/xw03x31lufgmjyc/cinc-17.1.35-armel.deb?raw=1) |
 | **Cinc Client 16.16.13** | [cinc-16.16.13-rpi-armv6l_armhf.deb](https://www.dropbox.com/s/rfhlblfz97q2qmv/cinc-16.16.13-rpi-armv6l_armhf.deb?raw=1) | [cinc-16.16.13-rpi3-armv7l_armhf.deb](https://www.dropbox.com/s/p7jh14hhh68akzf/cinc-16.16.13-rpi3-armv7l_armhf.deb?raw=1) | | |
@@ -42,7 +42,7 @@ For Debian/Raspbian:
 
     apt-get update
     apt-get upgrade
-    apt-get install -y autoconf build-essential fakeroot git libreadline-dev libssl-dev zlib1g-dev
+    apt-get install -y autoconf build-essential byacc fakeroot git libreadline-dev libssl-dev zlib1g-dev
 
 ## ld.so.preload
 
