@@ -91,7 +91,7 @@ Because my systems are used primarily has headless servers, I've configured them
 
     gpu_mem=16
 
-in the `/boot/config.txt`. I do this in the [mattray::raspberrypi](https://github.com/mattray/mattray-cookbook/blob/master/recipes/raspberrypi.rb#L59) recipe used by all of my Raspbian systems.
+in the `/boot/config.txt`. I do this in the [mattray::raspberrypi](https://github.com/mattray/mattray-cookbook/blob/main/recipes/raspberry_pi.rb#L25) recipe used by all of my Raspbian systems.
 
 ## Chef LEDs Handler Cookbook
 
