@@ -13,7 +13,7 @@ On Linux the serial console is usually available as `ttyS0`, and if it's enabled
     systemctl enable getty@ttyUSB0.service
     systemctl start getty@ttyUSB0.service
 
-I ran this on Raspbian 10, Armbian 11, and Debian 11 x86 and Arm systems and it worked across the board. I added it to my [Chef recipe](https://github.com/mattray/mattray-cookbook/blob/main/recipes/default.rb#L88) to ensure it stayed enabled across my current and any future machines.
+This creates a symlink from `/etc/systemd/system/getty.target.wants/getty@ttyUSB0.service` to `/lib/systemd/system/getty@.service` and starts listening on the USB serial console. I ran this on Raspbian 10, Armbian 11, and Debian 11 x86 and Arm systems and it worked across the board. I added it to my [Chef recipe](https://github.com/mattray/mattray-cookbook/blob/main/recipes/default.rb#L88) to ensure it stayed enabled across my current and any future machines.
 
 ## Accessing the USB Serial Console with CoolTerm
 
