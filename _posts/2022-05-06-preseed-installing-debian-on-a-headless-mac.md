@@ -4,19 +4,11 @@ title: Preseed Installing Debian 11 on a Headless MacBook Pro
 
 <a href="https://www.ifixit.com/Device/MacBook_Pro_13%22_Function_Keys_Late_2016"><img src="/assets/macbookpro13.jpg" alt="Late 2016 Function Keys MacBook Pro 13" width="312" height="234" align="right" /></a>
 
-My previous employer had a generous refurbished hardware program where we could purchase used hardware at a greatly discounted rate. I took advantage of this and bought a total of 5 2015 MacBook Airs and the IT folks generously threw in a 13" MacBook Pro with a broken screen, knowing my penchant for resuscitating broken hardware.
+My previous employer had a generous refurbished hardware program where we could purchase used laptops at a greatly discounted rate. I took advantage of this and bought a total of 5 2015 MacBook Airs and the IT folks generously threw in a 13" MacBook Pro with a broken screen, knowing my penchant for resuscitating broken hardware.
 
 The laptop screen would power up, but never displayed anything. While there was a potentially relevant Apple recall for displays, the repair was rejected because of apparent water damage to the machine. I attached a USB C HDMI adapter and that worked with macOS and I could have used the machine as a desktop with an external monitor, but I already had plenty of working laptops and didn't really need it for that. I decided I would add it to my piecemeal cluster of Linux servers running Kubernetes, I just needed to get a clean installation of Debian on it.
 
 Unfortunately USB C HDMI is not well-supported by the Debian installer. In fact, nothing worked beyond the initial `grub` installation screen. I initially went down the path of trying to use my [USB serial console cable](/2022/02/27/enabling-usb-serial-console), but gave up after running into the harsh reality that USB serial consoles are very lightly documented (a few references in some grub documentation) and blocked by the USB Braille support in standard Debian installers (I did a build taking this out, still no luck).
-
-### USB C Ethernet Adapters
-
-I have a pair of USB C gigabit ethernet adapters that both utilize the Realtek RTL8153 chipset, which isn't supported in the Linux 5.10 kernel shipped with Debian Bullseye/Stable. For my installation, I used a known-working 100 megabit ethernet adapter with a USB A-C adapter. After the installation, I had to use the [Debian Backports](https://backports.debian.org/Instructions/) [linux-image-amd64](https://packages.debian.org/bullseye-backports/linux-image-amd64).
-
-```
-apt install linux-image-amd64/bullseye-backports
-```
 
 ## Debian Preseeds
 
@@ -43,7 +35,7 @@ You need to provide the URL of the preseed file, which was served up by the simp
     linux   /install.amd/vmlinux auto=true priority=critical vga=788 --- quiet url=http://10.0.0.2/preseed.cfg netcfg/get_hostname=farnsworth netcfg/get_domain=bottlebru.sh
 ```
 
-After making these changes, hit F10 to run the installation with these settings.
+After making these changes, hit F10 to run the installation with your settings. I ran through this a few times with a working MacBook Air so I could verify the preseed settings were correct and iterate until I got everything right. Once it worked, I updated the preseed for the MacBook Pro and ran the installation. About 5 minutes later, I heard the distinctive Apple reboot sound and I was able to SSH into my new Linux server.
 
 ## 2016 MacBook Pro Preseed
 
@@ -103,7 +95,6 @@ d-i partman/confirm_nooverwrite boolean true
 
 ### Package Sources
 choose-mirror-bin mirror/http/countries select AU
-# local apt-cacher-ng mirror
 choose-mirror-bin mirror/http/proxy string http://10.0.0.4:3142
 d-i mirror/https/directory string /debian/
 d-i mirror/https/hostname string deb.debian.org
@@ -125,9 +116,17 @@ d-i preseed/late_command string \
 
 ### Finish and reboot
 d-i grub-installer/only_debian boolean true
-d-i grub-installer/bootdev  string /dev/sda
+d-i grub-installer/bootdev  string /dev/nvme0n1
 d-i finish-install/keep-consoles boolean false
 d-i finish-install/reboot_in_progress note
+```
+
+### USB C Ethernet Adapters
+
+I have a USB C gigabit ethernet adapter that utilizes the Realtek RTL8153 chipset, but that isn't supported in the Linux 5.10 kernel shipped with Debian Bullseye/Stable. For my installation, I used a known-working 100 megabit ethernet adapter with a USB A-C adapter. After the installation, I had to use the [Debian Backports](https://backports.debian.org/Instructions/) [linux-image-amd64](https://packages.debian.org/bullseye-backports/linux-image-amd64).
+
+```
+apt install linux-image-amd64/bullseye-backports
 ```
 
 ## Farnsworth
